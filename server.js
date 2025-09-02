@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const { runMigrations, verifyMigrations } = require('./database/migrations');
+const { testConnection } = require('./database/connection');
+
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -155,6 +158,19 @@ app.use((err, req, res, next) => {
     ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
   });
 });
+
+if (!process.env.VERCEL && process.env.RUN_MIGRATIONS_ON_START === 'true') {
+  (async () => {
+    const ok = await testConnection();
+    if (ok) {
+      await runMigrations();
+      await verifyMigrations();
+      console.log('Migrations applied on start');
+    } else {
+      console.warn('Skipped migrations: DB not reachable');
+    }
+  })().catch(err => console.error('Startup migrations failed:', err));
+}
 
 // Start server only when not running in a serverless environment (e.g., Vercel)
 if (!process.env.VERCEL) {
