@@ -1,0 +1,60 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+*.log.*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build & Caches
+dist/
+build/
+tmp/
+temp/
+.cache/
+.eslintcache
+
+# File uploads
+uploads/
+
+# Database artifacts
+database/*.dump
+database/*.sql.bak
+database/migration-files/*.tmp
+
+# Vercel
+.vercel/
+
+# Firebase/service accounts
+firebase-debug.log
+serviceAccount*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Test artifacts
+*.tap
+jest-html-reporters-*
+

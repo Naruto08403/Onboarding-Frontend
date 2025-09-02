@@ -1,0 +1,3 @@
+Default admin credentials:
+   Email: admin@company.com
+   Password: AdminPass123
