@@ -157,25 +157,27 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log('🚀 Driver Onboarding Backend System Started!');
-  console.log(`📍 Server running on port ${PORT}`);
-  console.log(`🌐 API Base: http://localhost:${PORT}/api`);
-  console.log(`📊 Health Check: http://localhost:${PORT}/health`);
-  console.log(`📚 API Info: http://localhost:${PORT}/api`);
-  console.log(`🔐 Authentication: http://localhost:${PORT}/api/auth`);
-  console.log(`🚗 Driver Management: http://localhost:${PORT}/api/drivers`);
-  console.log(`📄 Document Management: http://localhost:${PORT}/api/documents`);
-  console.log(`👨‍💼 Admin Functions: http://localhost:${PORT}/api/admin`);
-  console.log(`🔔 Notifications: http://localhost:${PORT}/api/notifications`);
-  console.log(`🔗 Integration Services: http://localhost:${PORT}/api/integration`); // NEW
-  console.log(`📁 Uploads: http://localhost:${PORT}/uploads`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🗄️ Database: PostgreSQL`);
-  console.log(`🔥 Firebase: ${process.env.FIREBASE_PROJECT_ID ? 'Configured' : 'Not configured'}`);
-  console.log(`💳 Stripe: ${process.env.STRIPE_SECRET_KEY ? 'Configured' : 'Not configured'}`);
-  console.log('✨ Ready to onboard drivers!');
-});
+// Start server only when not running in a serverless environment (e.g., Vercel)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log('🚀 Driver Onboarding Backend System Started!');
+    console.log(`📍 Server running on port ${PORT}`);
+    console.log(`🌐 API Base: http://localhost:${PORT}/api`);
+    console.log(`📊 Health Check: http://localhost:${PORT}/health`);
+    console.log(`📚 API Info: http://localhost:${PORT}/api`);
+    console.log(`🔐 Authentication: http://localhost:${PORT}/api/auth`);
+    console.log(`🚗 Driver Management: http://localhost:${PORT}/api/drivers`);
+    console.log(`📄 Document Management: http://localhost:${PORT}/api/documents`);
+    console.log(`👨‍💼 Admin Functions: http://localhost:${PORT}/api/admin`);
+    console.log(`🔔 Notifications: http://localhost:${PORT}/api/notifications`);
+    console.log(`🔗 Integration Services: http://localhost:${PORT}/api/integration`); // NEW
+    console.log(`📁 Uploads: http://localhost:${PORT}/uploads`);
+    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🗄️ Database: PostgreSQL`);
+    console.log(`🔥 Firebase: ${process.env.FIREBASE_PROJECT_ID ? 'Configured' : 'Not configured'}`);
+    console.log(`💳 Stripe: ${process.env.STRIPE_SECRET_KEY ? 'Configured' : 'Not configured'}`);
+    console.log('✨ Ready to onboard drivers!');
+  });
+}
 
 module.exports = app; 
